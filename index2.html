@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Countdown 🎉</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body{
+  height:100vh;
+  background: radial-gradient(circle at top, #ff5f6d, #1e1e2f);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+  overflow:hidden;
+}
+
+/* Card */
+.card{
+  width:340px;
+  padding:25px;
+  border-radius:25px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 40px rgba(255, 95, 109, 0.7);
+  text-align:center;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-12px); }
+}
+
+/* Image */
+.card img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:4px solid #fff;
+  object-fit:cover;
+  margin-bottom:15px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{ box-shadow: 0 0 15px #fff; }
+  to{ box-shadow: 0 0 30px #ffeb3b; }
+}
+
+/* Title */
+h1{
+  font-size:24px;
+  margin-bottom:5px;
+}
+
+.date{
+  font-size:14px;
+  opacity:0.85;
+  margin-bottom:20px;
+}
+
+/* Countdown */
+.countdown{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.time{
+  width:65px;
+  padding:10px 0;
+  background: rgba(0,0,0,0.3);
+  border-radius:15px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{ transform:scale(1); }
+  50%{ transform:scale(1.08); }
+  100%{ transform:scale(1); }
+}
+
+.time span{
+  display:block;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.time small{
+  font-size:11px;
+  opacity:0.8;
+}
+
+/* Wish */
+.wish{
+  font-size:16px;
+  line-height:1.4;
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <!-- Change image -->
+  <img src="https://i.imgur.com/1X9aQyH.png" alt="Birthday">
+
+  <h1>Birthday Countdown 🎂</h1>
+  <div class="date">07 February 2026</div>
+
+  <div class="countdown">
+    <div class="time"><span id="days">00</span><small>Days</small></div>
+    <div class="time"><span id="hours">00</span><small>Hours</small></div>
+    <div class="time"><span id="minutes">00</span><small>Minutes</small></div>
+    <div class="time"><span id="seconds">00</span><small>Seconds</small></div>
+  </div>
+
+  <div class="wish">
+    Counting every second…<br>
+    Something beautiful is coming 💖
+  </div>
+</div>
+
+<script>
+const targetDate = new Date("February 07, 2026 00:00:00").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  if(diff < 0) return;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+}, 1000);
+</script>
+
+</body>
+</html>
